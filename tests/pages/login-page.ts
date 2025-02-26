@@ -1,20 +1,22 @@
 import { Locator, Page } from '@playwright/test'
 import { OrderPage } from './order-page'
 import { SERVICE_URL } from '../../config/env-data'
+import { Input } from '../atoms/Input'
+import { Button } from '../atoms/Button'
 
 export class LoginPage {
   readonly page: Page
   readonly url: string = SERVICE_URL
-  readonly signInButton: Locator
-  readonly usernameField: Locator
-  readonly passwordField: Locator
+  readonly signInButton: Button
+  readonly usernameField: Input
+  readonly passwordField: Input
   // add more locators here
 
   constructor(page: Page) {
     this.page = page
-    this.signInButton = page.getByTestId('signIn-button')
-    this.usernameField = page.getByTestId('username-input')
-    this.passwordField = page.getByTestId('password-input')
+    this.signInButton = new Button(page, '[data-name=signIn-button]')
+    this.usernameField = new Input(page, '[data-name=username-input]')
+    this.passwordField = new Input(page, '[data-name=password-input]')
     // continue with the rest of the implementation below
   }
 
@@ -23,6 +25,8 @@ export class LoginPage {
   }
 
   async signIn(username: string, password: string) {
+    await this.usernameField.checkVisible();
+    await this.passwordField.checkVisible();
     await this.usernameField.fill(username)
     await this.passwordField.fill(password)
     await this.signInButton.click()
