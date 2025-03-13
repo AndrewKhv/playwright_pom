@@ -25,8 +25,8 @@ export class LoginPage extends BasePage {
   }
 
   async signIn(username: string, password: string) {
-    await this.usernameField.checkVisible();
-    await this.passwordField.checkVisible();
+    await this.usernameField.checkVisible()
+    await this.passwordField.checkVisible()
     await this.usernameField.fill(username)
     await this.passwordField.fill(password)
     await this.signInButton.click()

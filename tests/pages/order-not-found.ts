@@ -1,9 +1,8 @@
 import { BasePage } from './base-page'
 import { expect, Locator, Page } from '@playwright/test'
 
-
 export class OrderNotFoundPage extends BasePage {
-  readonly notFoundTitle: Locator;
+  readonly notFoundTitle: Locator
 
   constructor(page: Page) {
     super(page)
